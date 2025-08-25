@@ -25,6 +25,7 @@ type BlogPost = {
 type SocialLink = {
   label: string
   link: string
+  icon: string
 }
 
 export const PROJECTS: Project[] = [
@@ -107,18 +108,22 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     label: 'Github',
     link: 'https://github.com/ibelick',
+    icon: 'github',
   },
   {
     label: 'Twitter',
     link: 'https://twitter.com/ibelick',
+    icon: 'twitter',
   },
   {
     label: 'LinkedIn',
     link: 'https://www.linkedin.com/in/ibelick',
+    icon: 'linkedin',
   },
   {
     label: 'Instagram',
     link: 'https://www.instagram.com/ibelick',
+    icon: 'instagram',
   },
 ]
 

@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/morphing-dialog'
 import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
+import { SocialIcon } from '@/components/ui/social-icons'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
@@ -92,16 +93,19 @@ function ProjectVideo({ src }: ProjectVideoProps) {
 function MagneticSocialLink({
   children,
   link,
+  icon,
 }: {
   children: React.ReactNode
   link: string
+  icon: string
 }) {
   return (
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <a
         href={link}
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-3 py-1.5 text-base text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+        className="group relative inline-flex shrink-0 items-center gap-2 rounded-full bg-zinc-100 px-3 py-1.5 text-base text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
       >
+        <SocialIcon icon={icon} />
         {children}
         <svg
           width="15"
@@ -259,7 +263,7 @@ export default function Personal() {
         </p>
         <div className="flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
-            <MagneticSocialLink key={link.label} link={link.link}>
+            <MagneticSocialLink key={link.label} link={link.link} icon={link.icon}>
               {link.label}
             </MagneticSocialLink>
           ))}
