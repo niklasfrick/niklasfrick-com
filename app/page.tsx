@@ -20,6 +20,7 @@ import {
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
+import { formatDate, getRelativeTime } from '@/lib/blog-utils'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -245,6 +246,9 @@ export default function Personal() {
                   <p className="text-base text-zinc-500 dark:text-zinc-400">
                     {post.description}
                   </p>
+                  <div className="flex items-center space-x-2 text-sm text-zinc-400 dark:text-zinc-500">
+                    <span>{formatDate(post.date)}</span>
+                  </div>
                 </div>
               </Link>
             ))}

@@ -20,6 +20,8 @@ type BlogPost = {
   description: string
   link: string
   uid: string
+  date: string
+  lastUpdated: string
 }
 
 type SocialLink = {
@@ -81,6 +83,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description: 'Wie KI die Art verändert, wie wir designen',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-1',
+    date: '2024-01-15',
+    lastUpdated: '2025-08-26',
   },
   {
     title: 'Warum ich meinen Job gekündigt habe, um mein eigenes Unternehmen zu gründen',
@@ -88,6 +92,8 @@ export const BLOG_POSTS: BlogPost[] = [
       'Ein tiefer Einblick in meine Entscheidung, meinen Job zu kündigen und mein eigenes Unternehmen zu gründen',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-2',
+    date: '2024-01-10',
+    lastUpdated: '2025-08-26',
   },
   {
     title: 'Was ich in meinem ersten Jahr als Freelancer gelernt habe',
@@ -95,36 +101,38 @@ export const BLOG_POSTS: BlogPost[] = [
       'Ein Rückblick auf mein erstes Jahr als Freelancer und was ich gelernt habe',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-3',
+    date: '2024-01-05',
+    lastUpdated: '2025-08-26',
   },
   {
     title: 'Wie man Metadaten aus MDX für Next.js SEO exportiert',
     description: 'Ein Leitfaden zum Exportieren von Metadaten aus MDX-Dateien, um Next.js SEO-Funktionen zu nutzen.',
     link: '/blog/example-mdx-metadata',
     uid: 'blog-4',
+    date: '2024-01-20',
+    lastUpdated: '2025-08-26',
+  },
+  {
+    title: 'Mein neuer Blogpost Titel',
+    description: 'Mein neuer Blogpost Beschreibung kurz',
+    link: '/blog/mein-neuer-blogpost',
+    uid: 'blog-5',
+    date: '2025-08-26',
+    lastUpdated: '2025-08-26',
   },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
-    link: 'https://github.com/ibelick',
-    icon: 'github',
-  },
-  {
-    label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
-    icon: 'twitter',
-  },
-  {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
+    link: 'https://www.linkedin.com/in/niklasfrick',
     icon: 'linkedin',
   },
   {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
-    icon: 'instagram',
+    label: 'GitHub',
+    link: 'https://github.com/niklasfrick',
+    icon: 'github',
   },
 ]
 
-export const EMAIL = 'your@email.com'
+export const EMAIL = 'contact@niklasfrick.com'

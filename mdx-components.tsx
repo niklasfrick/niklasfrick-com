@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types'
 import { ComponentPropsWithoutRef } from 'react'
 import { highlight } from 'sugar-high'
+import { BlogDateDisplay } from '@/components/ui/blog-date-display'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -20,6 +21,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           <figcaption className="text-center">{caption}</figcaption>
         </figure>
       )
+    },
+    BlogDateDisplay: ({
+      date,
+      lastUpdated,
+      className,
+    }: {
+      date: string
+      lastUpdated: string
+      className?: string
+    }) => {
+      return <BlogDateDisplay date={date} lastUpdated={lastUpdated} className={className} />
     },
     code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
       const codeHTML = highlight(children as string)

@@ -22,8 +22,8 @@ function CopyButton() {
       className="font-base flex items-center gap-1 text-center text-base text-zinc-500 transition-colors dark:text-zinc-400"
       type="button"
     >
-      <TextMorph>{text}</TextMorph>
       <span>URL</span>
+      <TextMorph>{text}</TextMorph>
     </button>
   )
 }
