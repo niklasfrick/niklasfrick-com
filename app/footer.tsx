@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react'
 
 const THEMES_OPTIONS = [
   {
-    label: 'Light',
+    label: 'Hell',
     id: 'light',
     icon: <SunIcon className="h-4 w-4" />,
   },
   {
-    label: 'Dark',
+    label: 'Dunkel',
     id: 'dark',
     icon: <MoonIcon className="h-4 w-4" />,
   },
@@ -55,7 +55,7 @@ function ThemeSwitch() {
             key={theme.id}
             className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
             type="button"
-            aria-label={`Switch to ${theme.label} theme`}
+            aria-label={`Wechseln zu ${theme.label} Theme`}
             data-id={theme.id}
           >
             {theme.icon}
@@ -72,7 +72,7 @@ export function Footer() {
       <div className="flex items-center justify-between">
         <TextLoop className="text-sm text-zinc-500">
           <span>© {new Date().getFullYear()} Niklas Frick.</span>
-          <span>Built upon <a href="https://github.com/ibelick/nim" target="_blank" rel="noopener noreferrer" className="underline">Nim.</a></span>
+          <span>Basierend auf <a href="https://github.com/ibelick/nim" target="_blank" rel="noopener noreferrer" className="underline">Nim.</a></span>
         </TextLoop>
         <div className="text-sm text-zinc-400">
           <ThemeSwitch />

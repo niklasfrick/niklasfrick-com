@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Motion Primitives Pro',
     description:
-      'Advanced components and templates to craft beautiful websites.',
+      'Erweiterte Komponenten und Templates zum Erstellen schöner Websites.',
     link: 'https://pro.motion-primitives.com/',
     video:
       'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
   },
   {
     name: 'Motion Primitives',
-    description: 'UI kit to make beautiful, animated interfaces.',
+    description: 'UI-Kit zum Erstellen schöner, animierter Benutzeroberflächen.',
     link: 'https://motion-primitives.com/',
     video:
       'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
@@ -53,7 +53,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'Reglazed Studio',
     title: 'CEO',
     start: '2024',
-    end: 'Present',
+    end: 'Aktuell',
     link: 'https://ibelick.com',
     id: 'work1',
   },
@@ -69,7 +69,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'Freelance',
     title: 'Front-end Developer',
     start: '2017',
-    end: 'Present',
+    end: 'Aktuell',
     link: 'https://ibelick.com',
     id: 'work3',
   },
@@ -77,28 +77,28 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
+    title: 'Die Schnittstelle zwischen Design, KI und Design Engineering erkunden',
+    description: 'Wie KI die Art verändert, wie wir designen',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-1',
   },
   {
-    title: 'Why I left my job to start my own company',
+    title: 'Warum ich meinen Job gekündigt habe, um mein eigenes Unternehmen zu gründen',
     description:
-      'A deep dive into my decision to leave my job and start my own company',
+      'Ein tiefer Einblick in meine Entscheidung, meinen Job zu kündigen und mein eigenes Unternehmen zu gründen',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-2',
   },
   {
-    title: 'What I learned from my first year of freelancing',
+    title: 'Was ich in meinem ersten Jahr als Freelancer gelernt habe',
     description:
-      'A look back at my first year of freelancing and what I learned',
+      'Ein Rückblick auf mein erstes Jahr als Freelancer und was ich gelernt habe',
     link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
     uid: 'blog-3',
   },
   {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
+    title: 'Wie man Metadaten aus MDX für Next.js SEO exportiert',
+    description: 'Ein Leitfaden zum Exportieren von Metadaten aus MDX-Dateien, um Next.js SEO-Funktionen zu nutzen.',
     link: '/blog/example-mdx-metadata',
     uid: 'blog-4',
   },
