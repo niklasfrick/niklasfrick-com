@@ -4,6 +4,7 @@ import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { MDXProviderWrapper } from '@/app/mdx-provider'
 
 function CopyButton() {
   const [text, setText] = useState('Kopieren')
@@ -66,7 +67,9 @@ export default function LayoutBlogPost({
             </Link>
           </div>
         )}
-        {children}
+        <MDXProviderWrapper>
+          {children}
+        </MDXProviderWrapper>
       </main>
     </>
   )

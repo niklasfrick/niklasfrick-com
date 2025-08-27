@@ -18,8 +18,7 @@ Next.js unterstützt das Exportieren eines `metadata`-Objekts aus Ihren MDX-Date
 
 Sie können ein `metadata`-Objekt am Anfang Ihrer MDX-Datei wie folgt exportieren:
 
-```javascript
-// metadata.js
+```javascript:app/blog/example-mdx-metadata/metadata.js
 export const metadata = {
   title: 'Wie man Metadaten aus MDX für Next.js SEO exportiert',
   description: 'Ein Leitfaden zum Exportieren von Metadaten aus MDX-Dateien, um Next.js SEO-Funktionen zu nutzen.',
@@ -42,8 +41,7 @@ Diese Metadaten werden von Next.js erkannt und können für SEO, Open Graph und 
 
 ## Beispiel: TypeScript Konfiguration
 
-```typescript
-// next.config.ts
+```typescript:next.config.ts
 import { withMDX } from '@next/mdx'
 
 const nextConfig = {
@@ -55,8 +53,7 @@ export default withMDX()(nextConfig)
 
 ## Beispiel: CSS Styling
 
-```css
-/* styles.css */
+```css:styles/blog.css
 .blog-post {
   max-width: 65ch;
   margin: 0 auto;

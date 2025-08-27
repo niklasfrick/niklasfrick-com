@@ -16,8 +16,7 @@ This blog post demonstrates the new enhanced code blocks feature with file names
 
 ## React Component Example
 
-```tsx
-// components/Button.tsx
+```tsx:components/Button.tsx
 import React from 'react'
 
 interface ButtonProps {
@@ -44,8 +43,7 @@ export function Button({ children, variant = 'primary', onClick }: ButtonProps) 
 
 ## Python Script Example
 
-```python
-# data_processor.py
+```python:src/data_processor.py
 import pandas as pd
 import numpy as np
 from typing import List, Dict
@@ -91,8 +89,7 @@ def calculate_statistics(df: pd.DataFrame) -> Dict:
 
 ## JSON Configuration Example
 
-```json
-// config.json
+```json:config/database.json
 {
   "database": {
     "host": "localhost",
@@ -116,9 +113,8 @@ def calculate_statistics(df: pd.DataFrame) -> Dict:
 
 ## Shell Script Example
 
-```bash
+```bash:scripts/deploy.sh
 #!/bin/bash
-# deploy.sh
 
 set -e
 
@@ -147,8 +143,7 @@ echo "Deployment completed successfully!"
 
 ## SQL Query Example
 
-```sql
--- users.sql
+```sql:database/migrations/001_create_users.sql
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -174,8 +169,7 @@ FROM users;
 
 ## CSS with SCSS Example
 
-```scss
-// styles/components/_button.scss
+```scss:styles/components/_button.scss
 .button {
   display: inline-flex;
   align-items: center;
@@ -226,8 +220,7 @@ FROM users;
 
 ## Docker Configuration Example
 
-```dockerfile
-# Dockerfile
+```dockerfile:Dockerfile
 FROM node:18-alpine
 
 # Set working directory
@@ -254,8 +247,8 @@ CMD ["npm", "start"]
 
 ## YAML Configuration Example
 
-```yaml
-# docker-compose.yml
+```yaml:docker-compose.yaml
+# YAML comment
 version: '3.8'
 
 services:
@@ -265,7 +258,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://user:pass@db:5432/myapp
+      - DATABASE_URL=postgresql://user:pass@db:5432/myapp # Comment
     depends_on:
       - db
     volumes:
@@ -308,13 +301,25 @@ The enhanced code blocks include:
 
 ## Usage
 
-To use enhanced code blocks in your MDX files, simply add a comment with the filename at the beginning of your code block:
+To use enhanced code blocks in your MDX files, you can specify the filename in two ways:
 
+### Method 1: Using the new syntax (recommended)
+```markdown
+```javascript:src/components/Button.js
+const Button = ({ children }) => {
+  return <button>{children}</button>
+}
+```
+```
+
+### Method 2: Using comments (legacy)
 ```markdown
 ```javascript
-// my-file.js
-const example = "This will show 'my-file.js' in the header";
+// src/components/Button.js
+const Button = ({ children }) => {
+  return <button>{children}</button>
+}
 ```
 ```
 
-The filename comment will be automatically detected and displayed in the header, while being removed from the actual code content.
+Both methods will display the filename in the header and automatically remove it from the code content.
