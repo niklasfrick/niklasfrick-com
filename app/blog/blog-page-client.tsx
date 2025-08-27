@@ -40,7 +40,7 @@ interface BlogPageClientProps {
 export function BlogPageClient({ posts }: BlogPageClientProps) {
     return (
         <motion.main
-            className="space-y-12"
+            className="w-full space-y-12"
             variants={VARIANTS_CONTAINER}
             initial="hidden"
             animate="visible"
