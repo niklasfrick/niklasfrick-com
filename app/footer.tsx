@@ -70,8 +70,9 @@ export function Footer() {
   return (
     <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
       <div className="flex items-center justify-between">
-        <TextLoop className="text-sm text-zinc-500">
+        <TextLoop className="text-sm text-zinc-500" interval={3}>
           <span>© {new Date().getFullYear()} Niklas Frick.</span>
+          <span>Gebraut mit Kaffee &amp; einer Prise KI-Magie ☕🤖</span>
           <span>Basierend auf <a href="https://github.com/ibelick/nim" target="_blank" rel="noopener noreferrer" className="underline">Nim.</a></span>
         </TextLoop>
         <div className="text-sm text-zinc-400">
