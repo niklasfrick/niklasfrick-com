@@ -71,18 +71,10 @@ export function BlogPageClient({ posts }: BlogPageClientProps) {
                             whileHover={{ y: -2 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <Link href={post.link} className="block">
-                                <div className="relative overflow-hidden rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50 transition-all duration-200 group-hover:ring-zinc-300/50 dark:group-hover:ring-zinc-700/50">
-                                    <AnimatedBackground
-                                        enableHover
-                                        className="h-full w-full rounded-xl bg-zinc-100 dark:bg-zinc-900/80"
-                                        transition={{
-                                            type: 'spring',
-                                            bounce: 0,
-                                            duration: 0.2,
-                                        }}
-                                    >
-                                        <div className="p-6">
+                            <Link href={post.link} className="block h-full">
+                                <div className="relative overflow-hidden rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50 transition-all duration-200 group-hover:ring-zinc-300/50 dark:group-hover:ring-zinc-700/50 h-full">
+                                    <div className="h-full w-full rounded-xl bg-white dark:bg-zinc-950 transition-all duration-200 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-900/80">
+                                        <div className="p-6 h-full">
                                             <div className="flex flex-col space-y-4">
                                                 {/* Cover Image */}
                                                 {post.coverImage && (
@@ -114,7 +106,7 @@ export function BlogPageClient({ posts }: BlogPageClientProps) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </AnimatedBackground>
+                                    </div>
                                 </div>
                             </Link>
                         </motion.article>
