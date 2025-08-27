@@ -81,3 +81,28 @@ export function getRelativeTime(dateString: string): string {
 
     return 'Heute'; // fallback
 }
+
+export function extractCoverImageFromMDX(mdxContent: string): string | null {
+    // Look for Cover component usage in MDX content
+    const coverMatch = mdxContent.match(/<Cover\s+src="([^"]+)"[^>]*>/);
+    return coverMatch ? coverMatch[1] : null;
+}
+
+export async function getBlogPostCoverImage(slug: string): Promise<string | null> {
+    try {
+        // Remove the /blog/ prefix from the slug if present
+        const cleanSlug = slug.replace('/blog/', '');
+
+        // Try to read the MDX file content
+        const fs = await import('fs/promises');
+        const path = await import('path');
+
+        const mdxPath = path.join(process.cwd(), 'app', 'blog', cleanSlug, 'page.mdx');
+        const mdxContent = await fs.readFile(mdxPath, 'utf-8');
+
+        return extractCoverImageFromMDX(mdxContent);
+    } catch (error) {
+        console.warn(`Could not read cover image for blog post: ${slug}`, error);
+        return null;
+    }
+}

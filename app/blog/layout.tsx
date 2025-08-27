@@ -2,6 +2,7 @@
 import { TextMorph } from '@/components/ui/text-morph'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 function CopyButton() {
   const [text, setText] = useState('Kopieren')
@@ -33,20 +34,27 @@ export default function LayoutBlogPost({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const isBlogListingPage = pathname === '/blog'
+
   return (
     <>
-      <div className="pointer-events-none fixed left-0 top-0 z-10 h-12 w-full bg-gray-100 to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)] dark:bg-zinc-950" />
-      <ScrollProgress
-        className="fixed top-0 z-20 h-1"
-        springOptions={{
-          bounce: 0,
-        }}
-      />
+      {!isBlogListingPage && (
+        <>
+          <div className="pointer-events-none fixed left-0 top-0 z-10 h-12 w-full bg-gray-100 to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)] dark:bg-zinc-950" />
+          <ScrollProgress
+            className="fixed top-0 z-20 h-1"
+            springOptions={{
+              bounce: 0,
+            }}
+          />
 
-      <div className="absolute right-4 top-24">
-        <CopyButton />
-      </div>
-      <main className="prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-2xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-xl prose-h2:font-medium prose-h3:text-lg prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium prose-p:text-base">
+          <div className="absolute right-4 top-24">
+            <CopyButton />
+          </div>
+        </>
+      )}
+      <main className={`${!isBlogListingPage ? 'prose prose-gray mt-24 pb-20 prose-h4:prose-base dark:prose-invert prose-h1:text-2xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-xl prose-h2:font-medium prose-h3:text-lg prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium prose-p:text-base' : ''}`}>
         {children}
       </main>
     </>
