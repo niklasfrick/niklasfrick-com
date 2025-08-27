@@ -16,14 +16,7 @@ type WorkExperience = {
   logo?: string
 }
 
-type BlogPost = {
-  title: string
-  description: string
-  link: string
-  uid: string
-  date: string
-  lastUpdated: string
-}
+
 
 type SocialLink = {
   label: string
@@ -79,50 +72,8 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
 ]
 
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    title: 'Die Schnittstelle zwischen Design, KI und Design Engineering erkunden',
-    description: 'Wie KI die Art verändert, wie wir designen',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-1',
-    date: '2024-01-15',
-    lastUpdated: '2025-08-26',
-  },
-  {
-    title: 'Warum ich meinen Job gekündigt habe, um mein eigenes Unternehmen zu gründen',
-    description:
-      'Ein tiefer Einblick in meine Entscheidung, meinen Job zu kündigen und mein eigenes Unternehmen zu gründen',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-2',
-    date: '2024-01-10',
-    lastUpdated: '2025-08-26',
-  },
-  {
-    title: 'Was ich in meinem ersten Jahr als Freelancer gelernt habe',
-    description:
-      'Ein Rückblick auf mein erstes Jahr als Freelancer und was ich gelernt habe',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    uid: 'blog-3',
-    date: '2024-01-05',
-    lastUpdated: '2025-08-26',
-  },
-  {
-    title: 'Wie man Metadaten aus MDX für Next.js SEO exportiert',
-    description: 'Ein Leitfaden zum Exportieren von Metadaten aus MDX-Dateien, um Next.js SEO-Funktionen zu nutzen.',
-    link: '/blog/example-mdx-metadata',
-    uid: 'blog-4',
-    date: '2024-01-20',
-    lastUpdated: '2025-08-26',
-  },
-  {
-    title: 'Mein neuer Blogpost Titel',
-    description: 'Mein neuer Blogpost Beschreibung kurz',
-    link: '/blog/mein-neuer-blogpost',
-    uid: 'blog-5',
-    date: '2025-08-26',
-    lastUpdated: '2025-08-26',
-  },
-]
+// Blog posts are now automatically discovered from the file system
+// See lib/blog-utils.ts for the getAllBlogPosts() function
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
