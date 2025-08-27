@@ -13,6 +13,7 @@ type WorkExperience = {
   end: string
   link: string
   id: string
+  logo?: string
 }
 
 type BlogPost = {
@@ -52,28 +53,29 @@ export const PROJECTS: Project[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO',
-    start: '2024',
-    end: 'Aktuell',
-    link: 'https://ibelick.com',
-    id: 'work1',
+    company: 'Google',
+    title: 'Frontend Developer',
+    start: '2021',
+    end: '2023',
+    link: 'https://microsoft.com',
+    id: 'work2',
+    logo: '/logos/google.png',
+  },
+  {
+    company: 'Apple',
+    title: 'UI/UX Designer',
+    start: '2019',
+    end: '2021',
+    link: 'https://apple.com',
+    id: 'work3',
   },
   {
     company: 'Freelance',
     title: 'Design Engineer',
-    start: '2022',
-    end: '2024',
-    link: 'https://ibelick.com',
-    id: 'work2',
-  },
-  {
-    company: 'Freelance',
-    title: 'Front-end Developer',
     start: '2017',
-    end: 'Aktuell',
+    end: '2019',
     link: 'https://ibelick.com',
-    id: 'work3',
+    id: 'work4',
   },
 ]
 
