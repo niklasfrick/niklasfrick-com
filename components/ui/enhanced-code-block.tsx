@@ -16,17 +16,17 @@ const customTheme = {
         margin: 0,
         borderRadius: '0 0 8px 8px',
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-        fontSize: '14px',
+        fontSize: '13px',
         lineHeight: '1.5',
         overflow: 'auto',
-        padding: '16px',
+        padding: '12px',
     },
     'code[class*="language-"]': {
         ...oneLight['code[class*="language-"]'],
         background: 'transparent',
         color: '#383a42',
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-        fontSize: '14px',
+        fontSize: '13px',
         lineHeight: '1.5',
     },
 }
@@ -40,16 +40,16 @@ const customDarkTheme = {
         margin: 0,
         borderRadius: '0 0 8px 8px',
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-        fontSize: '14px',
+        fontSize: '13px',
         lineHeight: '1.5',
         overflow: 'auto',
-        padding: '16px',
+        padding: '12px',
     },
     'code[class*="language-"]': {
         ...oneDark['code[class*="language-"]'],
         background: 'transparent',
         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-        fontSize: '14px',
+        fontSize: '13px',
         lineHeight: '1.5',
     },
 }
@@ -167,36 +167,37 @@ export function EnhancedCodeBlock({
     }
 
     return (
-        <div className="my-6 rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
+        <div className="my-4 sm:my-6 rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800 overflow-hidden">
             {/* Header */}
             {(filename || lang !== 'text') && (
-                <div className="flex items-center justify-between border-b border-gray-200 bg-gray-100 px-4 py-2 dark:border-gray-700 dark:bg-gray-900">
-                    <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-between border-b border-gray-200 bg-gray-100 px-3 sm:px-4 py-2 dark:border-gray-700 dark:bg-gray-900">
+                    <div className="flex items-center space-x-2 min-w-0 flex-1">
                         {filename && (
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 truncate">
                                 {filename}
                             </span>
                         )}
                         {lang !== 'text' && (
-                            <span className="rounded bg-gray-200 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-400">
+                            <span className="rounded bg-gray-200 px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-400 whitespace-nowrap">
                                 {getLanguageName(lang)}
                             </span>
                         )}
                     </div>
                     <button
                         onClick={handleCopy}
-                        className="flex items-center space-x-1 rounded px-2 py-1 text-xs text-gray-500 hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                        className="flex items-center space-x-1 rounded px-2 py-1.5 text-xs text-gray-500 hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 touch-manipulation flex-shrink-0 ml-2"
                         title="Copy code"
+                        aria-label="Copy code to clipboard"
                     >
                         {copied ? (
                             <>
-                                <Check className="h-3 w-3" />
-                                <span>Copied!</span>
+                                <Check className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
+                                <span className="hidden sm:inline">Copied!</span>
                             </>
                         ) : (
                             <>
-                                <Copy className="h-3 w-3" />
-                                <span>Copy</span>
+                                <Copy className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
+                                <span className="hidden sm:inline">Copy</span>
                             </>
                         )}
                     </button>
@@ -204,7 +205,7 @@ export function EnhancedCodeBlock({
             )}
 
             {/* Code */}
-            <div className="relative">
+            <div className="relative overflow-x-auto">
                 <SyntaxHighlighter
                     language={lang}
                     style={isDarkMode ? customDarkTheme : customTheme}
@@ -213,16 +214,17 @@ export function EnhancedCodeBlock({
                         margin: 0,
                         borderRadius: '0 0 8px 8px',
                         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
-                        fontSize: '14px',
+                        fontSize: '13px',
                         lineHeight: '1.5',
                         fontFeatureSettings: '"liga" 1, "calt" 1',
                         fontVariantLigatures: 'contextual',
                         textRendering: 'optimizeLegibility',
+                        padding: '12px',
                     }}
                     lineNumberStyle={{
                         color: isDarkMode ? '#9ca3af' : '#6b7280',
-                        fontSize: '12px',
-                        paddingRight: '16px',
+                        fontSize: '11px',
+                        paddingRight: '12px',
                         minWidth: '2.5em',
                         fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
                     }}

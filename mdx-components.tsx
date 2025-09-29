@@ -1,6 +1,9 @@
 import type { MDXComponents } from 'mdx/types'
 import { ComponentPropsWithoutRef } from 'react'
 import { BlogDateDisplay } from '@/components/ui/blog-date-display'
+import { MetadataBlogDateDisplay } from '@/components/ui/metadata-blog-date-display'
+import { AutoMetadataBlogDateDisplay } from '@/components/ui/auto-metadata-blog-date-display'
+import { MetadataDisplay } from '@/components/ui/metadata-display'
 import { EnhancedCodeBlock } from '@/components/ui/enhanced-code-block'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -32,6 +35,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       className?: string
     }) => {
       return <BlogDateDisplay date={date} lastUpdated={lastUpdated} className={className} />
+    },
+    MetadataBlogDateDisplay: ({
+      className,
+    }: {
+      className?: string
+    }) => {
+      return <MetadataBlogDateDisplay className={className} />
+    },
+    AutoMetadataBlogDateDisplay: ({
+      className,
+    }: {
+      className?: string
+    }) => {
+      return <AutoMetadataBlogDateDisplay className={className} />
+    },
+    MetadataDisplay: ({
+      className,
+    }: {
+      className?: string
+    }) => {
+      return <MetadataDisplay className={className} />
     },
     pre: ({ children, ...props }: ComponentPropsWithoutRef<'pre'>) => {
       // Check if this is a code block

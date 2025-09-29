@@ -19,19 +19,6 @@ function updateBlogPostDates() {
     const currentDate = getCurrentDate();
     let updated = false;
 
-    // Read the data file
-    let dataContent = fs.readFileSync(DATA_FILE, 'utf8');
-
-    // Update lastUpdated for all blog posts
-    dataContent = dataContent.replace(
-        /lastUpdated: '\d{4}-\d{2}-\d{2}'/g,
-        `lastUpdated: '${currentDate}'`
-    );
-
-    // Write back to the data file
-    fs.writeFileSync(DATA_FILE, dataContent);
-    console.log(`✅ Updated lastUpdated dates to ${currentDate} in data.ts`);
-
     // Update individual blog post metadata files
     const blogDirs = fs.readdirSync(BLOG_DIR, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
@@ -41,24 +28,49 @@ function updateBlogPostDates() {
         const mdxFile = path.join(BLOG_DIR, blogDir, 'page.mdx');
 
         if (fs.existsSync(mdxFile)) {
+            const stats = fs.statSync(mdxFile);
+            const fileModifiedDate = new Date(stats.mtime).toISOString().split('T')[0];
+
             let mdxContent = fs.readFileSync(mdxFile, 'utf8');
 
-            // Update lastUpdated in metadata if it exists
+            // Check if file has lastUpdated field and if it needs updating
             if (mdxContent.includes('lastUpdated:')) {
-                mdxContent = mdxContent.replace(
-                    /lastUpdated: '\d{4}-\d{2}-\d{2}'/g,
-                    `lastUpdated: '${currentDate}'`
-                );
+                // Extract current lastUpdated date
+                const lastUpdatedMatch = mdxContent.match(/lastUpdated:\s*['"`]([^'"`]+)['"`]/);
+                const currentLastUpdated = lastUpdatedMatch ? lastUpdatedMatch[1] : null;
 
-                fs.writeFileSync(mdxFile, mdxContent);
-                console.log(`✅ Updated lastUpdated in ${blogDir}/page.mdx`);
-                updated = true;
+                // Only update if the file was modified after the lastUpdated date
+                if (currentLastUpdated && fileModifiedDate > currentLastUpdated) {
+                    mdxContent = mdxContent.replace(
+                        /lastUpdated: '\d{4}-\d{2}-\d{2}'/g,
+                        `lastUpdated: '${fileModifiedDate}'`
+                    );
+
+                    fs.writeFileSync(mdxFile, mdxContent);
+                    console.log(`✅ Updated lastUpdated in ${blogDir}/page.mdx to ${fileModifiedDate}`);
+                    updated = true;
+                } else if (!currentLastUpdated) {
+                    // If no lastUpdated field exists, add it with the file modification date
+                    mdxContent = mdxContent.replace(
+                        /(date:\s*['"`][^'"`]+['"`],)/,
+                        `$1\n  lastUpdated: '${fileModifiedDate}',`
+                    );
+
+                    fs.writeFileSync(mdxFile, mdxContent);
+                    console.log(`✅ Added lastUpdated field to ${blogDir}/page.mdx with date ${fileModifiedDate}`);
+                    updated = true;
+                } else {
+                    console.log(`ℹ️  ${blogDir}/page.mdx is up to date (lastUpdated: ${currentLastUpdated}, file modified: ${fileModifiedDate})`);
+                }
             }
         }
     }
 
-    if (!updated) {
-        console.log('ℹ️  No blog posts found with lastUpdated fields to update');
+    // Update the data.ts file to reflect any changes
+    if (updated) {
+        console.log(`✅ Blog post dates have been updated. Please run the data generation script if needed.`);
+    } else {
+        console.log('ℹ️  No blog posts needed date updates');
     }
 }
 
