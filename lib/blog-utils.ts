@@ -65,14 +65,21 @@ export function getRelativeTime(dateString: string): string {
   const diffTime = nowOnly.getTime() - dateOnly.getTime()
   const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24))
 
-  if (diffDays === 0) return 'Heute'
-  if (diffDays === 1) return 'Gestern'
+  if (diffDays === 0) return 'heute'
+  if (diffDays === 1) return 'gestern'
   if (diffDays > 1 && diffDays < 7) return `vor ${diffDays} Tagen`
-  if (diffDays >= 7 && diffDays < 30)
-    return `vor ${Math.floor(diffDays / 7)} Wochen`
-  if (diffDays >= 30 && diffDays < 365)
-    return `vor ${Math.floor(diffDays / 30)} Monaten`
-  if (diffDays >= 365) return `vor ${Math.floor(diffDays / 365)} Jahren`
+  if (diffDays >= 7 && diffDays < 30) {
+    const weeks = Math.floor(diffDays / 7)
+    return weeks === 1 ? 'letzte Woche' : `vor ${weeks} Wochen`
+  }
+  if (diffDays >= 30 && diffDays < 365) {
+    const months = Math.floor(diffDays / 30)
+    return months === 1 ? 'vor 1 Monat' : `vor ${months} Monaten`
+  }
+  if (diffDays >= 365) {
+    const years = Math.floor(diffDays / 365)
+    return years === 1 ? 'letztes Jahr' : `vor ${years} Jahren`
+  }
 
   // For future dates (shouldn't happen in normal usage)
   if (diffDays < 0) {
