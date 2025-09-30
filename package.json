@@ -1,12 +1,14 @@
 {
-  "name": "nim",
+  "name": "niklasfrick-com-website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "blog:update": "node scripts/update-blog-dates.js",
     "blog:create": "node scripts/create-blog-post.js"
   },

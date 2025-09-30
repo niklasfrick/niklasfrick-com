@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import { ComponentPropsWithoutRef } from 'react'
+import Image from 'next/image'
 import { BlogDateDisplay } from '@/components/ui/blog-date-display'
 import { MetadataBlogDateDisplay } from '@/components/ui/metadata-blog-date-display'
 import { AutoMetadataBlogDateDisplay } from '@/components/ui/auto-metadata-blog-date-display'
@@ -20,7 +21,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     }) => {
       return (
         <figure>
-          <img src={src} alt={alt} className="rounded-xl" />
+          <Image
+            src={src}
+            alt={alt}
+            className="rounded-xl"
+            width={800}
+            height={400}
+          />
           <figcaption className="text-center">{caption}</figcaption>
         </figure>
       )
@@ -93,7 +100,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         'type' in children &&
         children.type === 'code'
       ) {
-        const codeElement = children as any
+        const codeElement = children as {
+          type: string
+          props: {
+            className?: string
+            children?: string
+          }
+        }
         const className = codeElement.props?.className || ''
 
         // Parse language and filename from className

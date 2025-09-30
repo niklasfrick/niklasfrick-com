@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 /**
  * Script to automatically update the lastUpdated field in blog posts
@@ -9,14 +14,12 @@ const path = require('path')
  */
 
 const BLOG_DIR = path.join(__dirname, '../app/blog')
-const DATA_FILE = path.join(__dirname, '../app/data.ts')
 
 function getCurrentDate() {
   return new Date().toISOString().split('T')[0]
 }
 
 function updateBlogPostDates() {
-  const currentDate = getCurrentDate()
   let updated = false
 
   // Update individual blog post metadata files
