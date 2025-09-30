@@ -1,12 +1,13 @@
 export const metadata = {
   title: 'Enhanced Code Blocks Demo',
-  description: 'Demonstration of enhanced code blocks with file names, syntax highlighting, line numbers, and copy buttons.',
+  description:
+    'Demonstration of enhanced code blocks with file names, syntax highlighting, line numbers, and copy buttons.',
   date: '2024-01-25',
   lastUpdated: '2025-09-29',
   alternates: {
     canonical: '/blog/enhanced-code-blocks-demo',
   },
-};
+}
 
 # Enhanced Code Blocks Demo
 
@@ -29,8 +30,8 @@ export function Button({ children, variant = 'primary', onClick }: ButtonProps) 
   return (
     <button
       className={`px-4 py-2 rounded ${
-        variant === 'primary' 
-          ? 'bg-blue-500 text-white' 
+        variant === 'primary'
+          ? 'bg-blue-500 text-white'
           : 'bg-gray-200 text-gray-800'
       }`}
       onClick={onClick}
@@ -51,30 +52,30 @@ from typing import List, Dict
 def process_data(data: List[Dict]) -> pd.DataFrame:
     """
     Process raw data into a pandas DataFrame
-    
+
     Args:
         data: List of dictionaries containing raw data
-        
+
     Returns:
         Processed DataFrame
     """
     df = pd.DataFrame(data)
-    
+
     # Clean missing values
     df = df.dropna()
-    
+
     # Convert date columns
     date_columns = ['created_at', 'updated_at']
     for col in date_columns:
         if col in df.columns:
             df[col] = pd.to_datetime(df[col])
-    
+
     return df
 
 def calculate_statistics(df: pd.DataFrame) -> Dict:
     """Calculate basic statistics for numeric columns"""
     numeric_cols = df.select_dtypes(include=[np.number]).columns
-    
+
     stats = {}
     for col in numeric_cols:
         stats[col] = {
@@ -83,7 +84,7 @@ def calculate_statistics(df: pd.DataFrame) -> Dict:
             'min': df[col].min(),
             'max': df[col].max()
         }
-    
+
     return stats
 ```
 
@@ -160,7 +161,7 @@ INSERT INTO users (username, email, password_hash) VALUES
     ('bob_wilson', 'bob@example.com', 'hashed_password_3');
 
 -- Query to get user statistics
-SELECT 
+SELECT
     COUNT(*) as total_users,
     COUNT(CASE WHEN created_at >= NOW() - INTERVAL '30 days' THEN 1 END) as new_users_30d,
     AVG(EXTRACT(EPOCH FROM (NOW() - created_at))/86400) as avg_account_age_days
@@ -180,37 +181,37 @@ FROM users;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   border: none;
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
-  
+
   &--primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    
+
     &:hover {
       background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     }
   }
-  
+
   &--secondary {
     background: #f3f4f6;
     color: #374151;
     border: 1px solid #d1d5db;
-    
+
     &:hover {
       background: #e5e7eb;
       border-color: #9ca3af;
     }
   }
-  
+
   &--small {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
-  
+
   &--large {
     padding: 1rem 2rem;
     font-size: 1.125rem;
@@ -304,13 +305,16 @@ The enhanced code blocks include:
 To use enhanced code blocks in your MDX files, you can specify the filename in two ways:
 
 ### Method 1: Using the new syntax (recommended)
-```markdown
+
+````markdown
 ```javascript:src/components/Button.js
 const Button = ({ children }) => {
   return <button>{children}</button>
 }
 ```
-```
+````
+
+````
 
 ### Method 2: Using comments (legacy)
 ```markdown
@@ -319,8 +323,10 @@ const Button = ({ children }) => {
 const Button = ({ children }) => {
   return <button>{children}</button>
 }
-```
+````
+
 ```
 
 Both methods will display the filename in the header and automatically remove it from the code content.
 # Test comment
+```

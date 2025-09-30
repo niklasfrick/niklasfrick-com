@@ -12,11 +12,15 @@ export function cn(...inputs: ClassValue[]) {
 export function generateCompanyLogo(companyName: string): string {
   // Clean the company name and get initials
   const cleanName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').trim()
-  const words = cleanName.split(' ').filter(word => word.length > 0)
+  const words = cleanName.split(' ').filter((word) => word.length > 0)
 
   let initials = ''
   if (words.length >= 2) {
-    initials = words.slice(0, 2).map(word => word[0]).join('').toUpperCase()
+    initials = words
+      .slice(0, 2)
+      .map((word) => word[0])
+      .join('')
+      .toUpperCase()
   } else if (words.length === 1) {
     initials = words[0].slice(0, 2).toUpperCase()
   } else {
@@ -38,12 +42,14 @@ export async function getCompanyLogo(companyName: string): Promise<string> {
   try {
     // Try to get logo from Clearbit Logo API (free tier)
     const cleanName = companyName.replace(/[^a-zA-Z0-9\s]/g, '').trim()
-    const response = await fetch(`https://logo.clearbit.com/${cleanName.toLowerCase().replace(/\s+/g, '')}.com`)
+    const response = await fetch(
+      `https://logo.clearbit.com/${cleanName.toLowerCase().replace(/\s+/g, '')}.com`,
+    )
 
     if (response.ok) {
       return response.url
     }
-  } catch (error) {
+  } catch {
     // Silently fail and fall back to generated logo
   }
 

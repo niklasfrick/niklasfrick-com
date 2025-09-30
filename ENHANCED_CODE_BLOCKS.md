@@ -18,12 +18,14 @@ This project now includes enhanced code blocks with file names, syntax highlight
 
 To use enhanced code blocks in your MDX files, simply add a comment with the filename at the beginning of your code block:
 
-```markdown
+````markdown
 ```javascript
 // my-file.js
-const example = "This will show 'my-file.js' in the header";
+const example = "This will show 'my-file.js' in the header"
 ```
-```
+````
+
+````
 
 ### Supported File Types
 
@@ -72,9 +74,10 @@ export function Button({ children, variant = 'primary' }: ButtonProps) {
     </button>
   )
 }
-```
+````
 
 #### Python Script
+
 ```python
 # data_processor.py
 import pandas as pd
@@ -85,6 +88,7 @@ def process_data(data):
 ```
 
 #### JSON Configuration
+
 ```json
 // config.json
 {
@@ -96,6 +100,7 @@ def process_data(data):
 ```
 
 #### Shell Script
+
 ```bash
 #!/bin/bash
 # deploy.sh
@@ -149,10 +154,11 @@ npm install react-syntax-highlighter @types/react-syntax-highlighter
 
 Make sure the language is specified correctly in the code block:
 
-```markdown
+````markdown
 ```javascript
 // Correct
 ```
+````
 
 ```js
 // Also correct
@@ -161,7 +167,8 @@ Make sure the language is specified correctly in the code block:
 ```typescript
 // Correct for TypeScript
 ```
-```
+
+````
 
 ### Filename Not Showing
 
@@ -175,12 +182,13 @@ const code = "example";
 ```javascript
 // filename.js
 const code = "example";  ✅ Also correct
-```
+````
 
 ```javascript
-const code = "example";
+const code = 'example'
 // filename.js  ❌ Wrong - filename must be first
 ```
+
 ```
 
 ### Copy Button Not Working
@@ -190,3 +198,4 @@ The copy functionality requires the Clipboard API, which is supported in all mod
 1. Check if you're using HTTPS (required for Clipboard API)
 2. Ensure the browser supports the Clipboard API
 3. Check the browser console for any errors
+```

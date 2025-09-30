@@ -39,12 +39,14 @@ npm run blog:update
 The portfolio includes automatic company logo generation for work experience entries:
 
 ### How it works:
+
 1. **Real logo detection**: The system first attempts to fetch real company logos from Clearbit's Logo API
 2. **Fallback generation**: If no real logo is found, it generates a beautiful logo using the company's initials
 3. **Consistent colors**: Each company gets a unique, consistent color based on their name
 4. **Custom logos**: You can also provide custom logo URLs in the data
 
 ### Adding work experience:
+
 ```typescript
 // In app/data.ts
 export const WORK_EXPERIENCE: WorkExperience[] = [
@@ -56,12 +58,14 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://google.com',
     id: 'work1',
     // logo field is optional - will be auto-generated if not provided
-  }
+  },
 ]
 ```
 
 ### Using the utility script:
+
 ```bash
 node scripts/add-work-experience.js
 ```
+
 This interactive script helps you add new work experience entries with automatic logo generation.

@@ -53,7 +53,7 @@ function ThemeSwitch() {
         return (
           <button
             key={theme.id}
-            className="inline-flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50 touch-manipulation"
+            className="inline-flex h-9 w-9 touch-manipulation items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 sm:h-8 sm:w-8 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
             type="button"
             aria-label={`Wechseln zu ${theme.label} Theme`}
             data-id={theme.id}
@@ -68,14 +68,27 @@ function ThemeSwitch() {
 
 export function Footer() {
   return (
-    <footer className="mt-16 sm:mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <TextLoop className="text-xs sm:text-sm text-zinc-500 min-w-0 flex-1" interval={3}>
+    <footer className="mt-16 border-t border-zinc-100 px-0 py-4 sm:mt-24 dark:border-zinc-800">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <TextLoop
+          className="min-w-0 flex-1 text-xs text-zinc-500 sm:text-sm"
+          interval={3}
+        >
           <span>© {new Date().getFullYear()} Niklas Frick.</span>
           <span>Gebraut mit Kaffee &amp; einer Prise KI-Magie ☕🤖</span>
-          <span>Basierend auf <a href="https://github.com/ibelick/nim" target="_blank" rel="noopener noreferrer" className="underline">Nim.</a></span>
+          <span>
+            Basierend auf{' '}
+            <a
+              href="https://github.com/ibelick/nim"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              Nim.
+            </a>
+          </span>
         </TextLoop>
-        <div className="text-sm text-zinc-400 flex-shrink-0">
+        <div className="flex-shrink-0 text-sm text-zinc-400">
           <ThemeSwitch />
         </div>
       </div>

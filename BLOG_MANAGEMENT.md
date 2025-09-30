@@ -5,12 +5,14 @@ This guide explains how to manage blog posts with automatic date tracking.
 ## Overview
 
 Blog posts now automatically track:
+
 - **Date**: When the post was created
 - **Last Updated**: When the post was last modified
 
 ## File Structure
 
 Each blog post consists of:
+
 1. **MDX file**: `app/blog/[slug]/page.mdx` - Contains the post content and metadata
 2. **Data entry**: `app/data.ts` - Contains the post listing with dates
 
@@ -23,6 +25,7 @@ npm run blog:create "my-new-post" "My New Post Title" "A brief description of th
 ```
 
 This will:
+
 - Create the directory `app/blog/my-new-post/`
 - Create `page.mdx` with proper metadata
 - Set both `date` and `lastUpdated` to today's date
@@ -43,7 +46,7 @@ export const metadata = {
   alternates: {
     canonical: '/blog/your-slug',
   },
-};
+}
 
 # Your Post Title
 
@@ -85,6 +88,7 @@ npm run blog:update
 Dates are stored in ISO format: `YYYY-MM-DD`
 
 Examples:
+
 - `2024-01-21`
 - `2024-12-31`
 
@@ -93,20 +97,16 @@ Examples:
 The `lib/blog-utils.ts` file provides helper functions:
 
 ```typescript
-import { 
-  getCurrentDate, 
-  formatDate, 
-  getRelativeTime 
-} from '@/lib/blog-utils';
+import { getCurrentDate, formatDate, getRelativeTime } from '@/lib/blog-utils'
 
 // Get current date
-const today = getCurrentDate(); // "2024-01-21"
+const today = getCurrentDate() // "2024-01-21"
 
 // Format for display
-const displayDate = formatDate('2024-01-21'); // "21. Januar 2024"
+const displayDate = formatDate('2024-01-21') // "21. Januar 2024"
 
 // Get relative time
-const relative = getRelativeTime('2024-01-20'); // "vor 1 Tag"
+const relative = getRelativeTime('2024-01-20') // "vor 1 Tag"
 ```
 
 ## Git Hooks (Optional)
@@ -119,6 +119,7 @@ npm run blog:update
 ```
 
 Make it executable:
+
 ```bash
 chmod +x .git/hooks/pre-commit
 ```

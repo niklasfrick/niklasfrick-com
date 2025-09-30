@@ -23,6 +23,7 @@ When displaying a company logo, the system follows this priority:
 ### 2. Logo Generation
 
 Generated logos use:
+
 - **Company initials** (first 2 letters of company name)
 - **Consistent gray background** with white text
 - **Professional styling** (via DiceBear API)
@@ -64,7 +65,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     link: 'https://example.com',
     id: 'work3',
     // No logo field - will use generated initials logo
-  }
+  },
 ]
 ```
 
@@ -77,6 +78,7 @@ node scripts/setup-company-logos.js
 ```
 
 This script will:
+
 - Download logos for popular companies (Google, Microsoft, Apple, etc.)
 - Save them to `public/logos/` folder
 - Provide usage instructions
@@ -88,6 +90,7 @@ node scripts/add-work-experience.js
 ```
 
 This script will:
+
 - Ask for company details
 - Generate a work experience entry
 - Show the generated logo URL
@@ -103,6 +106,7 @@ This script will:
 ### Color Scheme
 
 The system uses a consistent color scheme:
+
 - **Background**: Light Zinc (`#a1a1aa`) - subtle and less prominent
 - **Text**: White (`#ffffff`) - provides excellent contrast
 
@@ -128,7 +132,7 @@ const textColor = 'ffffff' // White
 Modify the `size` prop when using the `CompanyLogo` component:
 
 ```tsx
-<CompanyLogo 
+<CompanyLogo
   companyName="Google"
   size={64} // Larger logo
 />
@@ -147,6 +151,7 @@ return `https://api.dicebear.com/7.x/initials/svg?seed=${initials}&backgroundCol
 ### Logo Not Loading
 
 If logos aren't loading:
+
 1. Check your internet connection
 2. Verify the company name is spelled correctly
 3. The system will automatically fall back to generated logos
@@ -154,6 +159,7 @@ If logos aren't loading:
 ### Custom Logo Issues
 
 If custom logos aren't displaying:
+
 1. Verify the URL is accessible
 2. Ensure the image format is supported (PNG, JPG, SVG)
 3. Check that the URL doesn't require authentication
@@ -167,10 +173,12 @@ If custom logos aren't displaying:
 ## Examples
 
 ### Real Company Logos
+
 - Google, Microsoft, Apple, etc. will fetch real logos
 - Smaller companies may fall back to generated logos
 
 ### Generated Logo Examples
+
 - "Acme Corp" → "AC" in gray with white text
 - "Tech Solutions Inc" → "TS" in gray with white text
 - "Freelance" → "FR" in gray with white text
@@ -178,6 +186,7 @@ If custom logos aren't displaying:
 ## Future Enhancements
 
 Potential improvements:
+
 - Logo caching system
 - More logo generation styles
 - Company logo database integration

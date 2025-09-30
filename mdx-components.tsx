@@ -34,32 +34,65 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       lastUpdated: string
       className?: string
     }) => {
-      return <BlogDateDisplay date={date} lastUpdated={lastUpdated} className={className} />
+      return (
+        <BlogDateDisplay
+          date={date}
+          lastUpdated={lastUpdated}
+          className={className}
+        />
+      )
     },
     MetadataBlogDateDisplay: ({
+      date,
+      lastUpdated,
       className,
     }: {
+      date: string
+      lastUpdated?: string
       className?: string
     }) => {
-      return <MetadataBlogDateDisplay className={className} />
+      return (
+        <MetadataBlogDateDisplay
+          date={date}
+          lastUpdated={lastUpdated}
+          className={className}
+        />
+      )
     },
     AutoMetadataBlogDateDisplay: ({
+      title,
+      description,
+      date,
+      lastUpdated,
       className,
     }: {
+      title: string
+      description: string
+      date: string
+      lastUpdated?: string
       className?: string
     }) => {
-      return <AutoMetadataBlogDateDisplay className={className} />
+      return (
+        <AutoMetadataBlogDateDisplay
+          title={title}
+          description={description}
+          date={date}
+          lastUpdated={lastUpdated}
+          className={className}
+        />
+      )
     },
-    MetadataDisplay: ({
-      className,
-    }: {
-      className?: string
-    }) => {
+    MetadataDisplay: ({ className }: { className?: string }) => {
       return <MetadataDisplay className={className} />
     },
     pre: ({ children, ...props }: ComponentPropsWithoutRef<'pre'>) => {
       // Check if this is a code block
-      if (children && typeof children === 'object' && 'type' in children && children.type === 'code') {
+      if (
+        children &&
+        typeof children === 'object' &&
+        'type' in children &&
+        children.type === 'code'
+      ) {
         const codeElement = children as any
         const className = codeElement.props?.className || ''
 
@@ -77,7 +110,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           if (filenameMatch) {
             const commentFilename = filenameMatch[1]
             // Remove the filename comment from the code content
-            codeContent = codeContent.replace(/^(?:\/\/|#)\s*[^\s]+\.\w+\s*\n?/, '')
+            codeContent = codeContent.replace(
+              /^(?:\/\/|#)\s*[^\s]+\.\w+\s*\n?/,
+              '',
+            )
             return (
               <EnhancedCodeBlock
                 language={language}

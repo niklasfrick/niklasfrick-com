@@ -6,16 +6,19 @@ import Link from 'next/link'
 
 export function Header() {
   return (
-    <header className="mb-6 sm:mb-8 flex items-center justify-between">
-      <div className="flex-1 min-w-0 pr-4">
-        <Link href="/" className="text-xl sm:text-2xl md:text-3xl font-medium text-black dark:text-white inline-block">
+    <header className="mb-6 flex items-center justify-between sm:mb-8">
+      <div className="min-w-0 flex-1 pr-4">
+        <Link
+          href="/"
+          className="inline-block text-xl font-medium text-black sm:text-2xl md:text-3xl dark:text-white"
+        >
           Niklas Frick
         </Link>
         <TextEffect
           as="p"
           preset="fade"
           per="char"
-          className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-500 truncate"
+          className="truncate text-base text-zinc-600 sm:text-lg md:text-xl dark:text-zinc-500"
           delay={0.5}
         >
           Platform Engineer

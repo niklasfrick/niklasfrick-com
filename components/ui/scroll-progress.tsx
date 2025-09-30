@@ -1,6 +1,12 @@
 'use client'
 
-import { motion, SpringOptions, useScroll, useSpring, useTransform } from 'motion/react'
+import {
+  motion,
+  SpringOptions,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react'
 import { cn } from '@/lib/utils'
 import { RefObject } from 'react'
 
@@ -20,10 +26,10 @@ const DEFAULT_SPRING_OPTIONS: SpringOptions = {
 const interpolateColor = (progress: number) => {
   // Define color stops for smooth interpolation
   const colors = [
-    { pos: 0, r: 239, g: 68, b: 68 },   // red-500
+    { pos: 0, r: 239, g: 68, b: 68 }, // red-500
     { pos: 0.33, r: 245, g: 158, b: 11 }, // amber-500
     { pos: 0.66, r: 16, g: 185, b: 129 }, // emerald-500
-    { pos: 1, r: 59, g: 130, b: 246 }   // blue-500
+    { pos: 1, r: 59, g: 130, b: 246 }, // blue-500
   ]
 
   // Find the two colors to interpolate between
@@ -65,7 +71,9 @@ export function ScrollProgress({
   })
 
   // Transform scroll progress to color with smooth interpolation
-  const backgroundColor = useTransform(scrollYProgress, (value) => interpolateColor(value))
+  const backgroundColor = useTransform(scrollYProgress, (value) =>
+    interpolateColor(value),
+  )
 
   return (
     <motion.div
