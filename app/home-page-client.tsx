@@ -162,10 +162,11 @@ export function HomePageClient({
       >
         <div className="flex-1">
           <p className="text-base leading-relaxed text-zinc-600 sm:text-lg md:text-xl dark:text-zinc-400">
-            Spezialisiert auf die Entwicklung und Optimierung von Entwicklerplattformen,
-            die Teams dabei unterstützen, effizienter zu arbeiten und bessere Software zu erstellen.
-            Durch Artikel, Schulungen und praktische Anleitungen teile ich mein Wissen,
-            um komplexe Infrastruktur-Herausforderungen verständlich zu machen.
+            Spezialisiert auf die Entwicklung und Optimierung von
+            Entwicklerplattformen, die Teams dabei unterstützen, effizienter zu
+            arbeiten und bessere Software zu erstellen. Durch Artikel,
+            Schulungen und praktische Anleitungen teile ich mein Wissen, um
+            komplexe Infrastruktur-Herausforderungen verständlich zu machen.
           </p>
         </div>
       </motion.section>
