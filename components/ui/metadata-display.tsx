@@ -20,14 +20,14 @@ export function MetadataDisplay({ className = '' }: { className?: string }) {
     async function fetchMetadata() {
       try {
         // Extract the blog slug from the pathname
-        const blogSlug = pathname.replace('/blog/', '').replace(/\/$/, '')
-        if (!blogSlug || blogSlug === 'blog') {
+        const blogSlug = pathname.replace('/beitraege/', '').replace(/\/$/, '')
+        if (!blogSlug || blogSlug === 'beitraege') {
           setLoading(false)
           return
         }
 
         // Try to fetch the MDX file content
-        const response = await fetch(`/blog/${blogSlug}/page.mdx`)
+        const response = await fetch(`/beitraege/${blogSlug}/page.mdx`)
         if (response.ok) {
           const mdxContent = await response.text()
 

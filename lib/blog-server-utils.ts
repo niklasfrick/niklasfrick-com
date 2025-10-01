@@ -45,7 +45,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     const fs = await import('fs/promises')
     const path = await import('path')
 
-    const blogDir = path.join(process.cwd(), 'app', 'blog')
+    const blogDir = path.join(process.cwd(), 'app', 'beitraege')
     const entries = await fs.readdir(blogDir, { withFileTypes: true })
 
     const blogPosts: BlogPost[] = []
@@ -64,7 +64,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
             blogPosts.push({
               title: metadata.title,
               description: metadata.description,
-              link: `/blog/${entry.name}`,
+              link: `/beitraege/${entry.name}`,
               uid: entry.name,
               date: metadata.date,
               lastUpdated: metadata.lastUpdated || metadata.date,

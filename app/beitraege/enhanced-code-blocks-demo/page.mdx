@@ -1,0 +1,468 @@
+export const metadata = {
+  title: 'Infrastructure as Code: Terraform Best Practices',
+  description:
+    'Praktische Beispiele und Best Practices für Infrastructure as Code mit Terraform, inklusive Module, State Management und CI/CD Integration.',
+  date: '2024-01-25',
+  lastUpdated: '2025-09-29',
+  alternates: {
+    canonical: '/beitraege/enhanced-code-blocks-demo',
+  },
+}
+
+# Infrastructure as Code: Terraform Best Practices
+
+<BlogDateDisplay date="2024-01-25" lastUpdated="2025-09-29" className="mb-6" />
+
+Dieser Artikel zeigt praktische Beispiele und Best Practices für Infrastructure as Code mit Terraform, inklusive Module, State Management und CI/CD Integration.
+
+## Terraform Module Example
+
+```hcl:modules/kubernetes-cluster/main.tf
+# Kubernetes Cluster Module
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+resource "aws_eks_cluster" "main" {
+  name     = var.cluster_name
+  role_arn = aws_iam_role.cluster.arn
+  version  = var.kubernetes_version
+
+  vpc_config {
+    subnet_ids              = var.subnet_ids
+    endpoint_private_access = true
+    endpoint_public_access  = true
+    public_access_cidrs     = var.public_access_cidrs
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
+  ]
+
+  tags = var.tags
+}
+```
+
+## Kubernetes Deployment Example
+
+```yaml:deployments/app-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-api
+  namespace: platform
+  labels:
+    app: platform-api
+    version: v1.0.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: platform-api
+  template:
+    metadata:
+      labels:
+        app: platform-api
+        version: v1.0.0
+    spec:
+      containers:
+      - name: platform-api
+        image: platform-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: platform-secrets
+              key: database-url
+        - name: LOG_LEVEL
+          value: "info"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+```
+
+## Helm Chart Values Example
+
+```yaml:values.yaml
+# Platform API Helm Chart Values
+replicaCount: 3
+
+image:
+  repository: platform-api
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: api.platform.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: platform-api-tls
+      hosts:
+        - api.platform.example.com
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+```
+
+## CI/CD Pipeline Example
+
+```yaml:.github/workflows/platform-deploy.yml
+name: Platform Deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.6.0
+    
+    - name: Terraform Format Check
+      run: terraform fmt -check
+    
+    - name: Terraform Init
+      run: terraform init
+    
+    - name: Terraform Validate
+      run: terraform validate
+    
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+      env:
+        TF_VAR_environment: staging
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+    
+    - name: Deploy to EKS
+      run: |
+        aws eks update-kubeconfig --region eu-central-1 --name platform-cluster
+        helm upgrade --install platform-api ./helm/platform-api \
+          --namespace platform \
+          --create-namespace \
+          --set image.tag=${{ github.sha }}
+```
+
+## Prometheus Monitoring Configuration
+
+```yaml:monitoring/prometheus-config.yaml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "platform-rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'kubernetes-pods'
+    kubernetes_sd_configs:
+      - role: pod
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
+
+  - job_name: 'kubernetes-nodes'
+    kubernetes_sd_configs:
+      - role: node
+    relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/${1}/proxy/metrics
+```
+
+## Docker Compose for Local Development
+
+```yaml:docker-compose.dev.yml
+version: '3.8'
+
+services:
+  platform-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/platform_dev
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+    networks:
+      - platform-network
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=platform_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - platform-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - platform-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    networks:
+      - platform-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+
+networks:
+  platform-network:
+    driver: bridge
+```
+
+## Multi-stage Dockerfile for Platform API
+
+```dockerfile:Dockerfile
+# Build stage
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY src/ ./src/
+
+# Build the application
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Create app user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S platform -u 1001
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Copy built application from builder stage
+COPY --from=builder /app/dist ./dist
+
+# Copy necessary files
+COPY --chown=platform:nodejs . .
+
+# Switch to non-root user
+USER platform
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1
+
+# Start the application
+CMD ["node", "dist/index.js"]
+```
+
+## GitOps Configuration with ArgoCD
+
+```yaml:argocd-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-api
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/company/platform-api
+    targetRevision: HEAD
+    path: helm/platform-api
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-production.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+```
+
+## Platform Engineering Best Practices
+
+Diese Beispiele zeigen bewährte Praktiken für Platform Engineering:
+
+- **Infrastructure as Code**: Terraform für reproduzierbare Infrastruktur
+- **Container-Orchestrierung**: Kubernetes für skalierbare Anwendungen
+- **Monitoring & Observability**: Prometheus für Metriken und Alerting
+- **CI/CD Pipelines**: Automatisierte Deployments mit GitHub Actions
+- **GitOps**: ArgoCD für deklarative Deployments
+- **Security**: Non-root Container und Health Checks
+- **Local Development**: Docker Compose für konsistente Entwicklungsumgebungen
+
+## Nächste Schritte
+
+Um diese Platform Engineering Best Practices zu implementieren:
+
+1. **Infrastruktur planen**: Beginnen Sie mit Terraform-Modulen für Ihre Cloud-Provider
+2. **Containerisierung**: Docker-Images für alle Anwendungen erstellen
+3. **Orchestrierung**: Kubernetes-Cluster für Produktions-Workloads
+4. **Monitoring**: Prometheus und Grafana für Observability
+5. **CI/CD**: Automatisierte Pipelines für Deployments
+6. **GitOps**: ArgoCD für deklarative Deployments
+
+### Weiterführende Ressourcen
+
+- [Terraform Best Practices](https://www.terraform.io/docs/cloud/guides/recommended-practices/)
+- [Kubernetes Documentation](https://kubernetes.io/docs/)
+- [Prometheus Monitoring](https://prometheus.io/docs/)
+- [ArgoCD GitOps](https://argo-cd.readthedocs.io/)

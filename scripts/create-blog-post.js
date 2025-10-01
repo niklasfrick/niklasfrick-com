@@ -21,7 +21,7 @@ if (!title || !description || !slug) {
 const currentDate = new Date().toISOString().split('T')[0]
 
 // Create the blog post directory
-const blogDir = path.join(process.cwd(), 'app', 'blog', slug)
+const blogDir = path.join(process.cwd(), 'app', 'beitraege', slug)
 const mdxFile = path.join(blogDir, 'page.mdx')
 
 // Create directory if it doesn't exist
@@ -36,7 +36,7 @@ const mdxContent = `export const metadata = {
   date: '${currentDate}',
   lastUpdated: '${currentDate}',
   alternates: {
-    canonical: '/blog/${slug}',
+    canonical: '/beitraege/${slug}',
   },
 };
 
@@ -69,7 +69,7 @@ fs.writeFileSync(mdxFile, mdxContent)
 console.log(`✅ Blog post created successfully!`)
 console.log(`📁 Directory: ${blogDir}`)
 console.log(`📄 File: ${mdxFile}`)
-console.log(`🔗 URL: /blog/${slug}`)
+console.log(`🔗 URL: /beitraege/${slug}`)
 console.log(
   `\n💡 Tip: The blog post will automatically appear on your blog page and home page!`,
 )

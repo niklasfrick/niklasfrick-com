@@ -1,4 +1,4 @@
-import { PROJECTS, WORK_EXPERIENCE, EMAIL, SOCIAL_LINKS } from './data'
+import { PROJECTS, EMAIL, SOCIAL_LINKS } from './data'
 import { getLatestBlogPosts } from '@/lib/blog-server-utils'
 import { HomePageClient } from './home-page-client'
 
@@ -9,7 +9,6 @@ export default async function Personal() {
   return (
     <HomePageClient
       projects={PROJECTS}
-      workExperience={WORK_EXPERIENCE}
       latestBlogPosts={latestBlogPosts}
       email={EMAIL}
       socialLinks={SOCIAL_LINKS}

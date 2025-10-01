@@ -51,7 +51,7 @@ export default function LayoutBlogPost({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-  const isBlogListingPage = pathname === '/blog'
+  const isBlogListingPage = pathname === '/beitraege'
 
   return (
     <>
@@ -76,7 +76,7 @@ export default function LayoutBlogPost({
         {!isBlogListingPage && (
           <div className="mb-6 sm:mb-8">
             <Link
-              href="/blog"
+              href="/beitraege"
               className="inline-flex min-h-[44px] touch-manipulation items-center gap-2 text-xs text-zinc-600 no-underline transition-colors duration-200 hover:text-zinc-900 sm:text-sm dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               ← <span>alle Beiträge</span>

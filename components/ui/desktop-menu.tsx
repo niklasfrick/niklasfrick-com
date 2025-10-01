@@ -7,7 +7,8 @@ export function DesktopMenu() {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/ueber-mich', label: 'Über mich' },
+    { href: '/beitraege', label: 'Beiträge' },
   ]
 
   return (
@@ -16,11 +17,10 @@ export function DesktopMenu() {
         <Link
           key={item.href}
           href={item.href}
-          className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-zinc-900 dark:hover:text-zinc-100 ${
-            pathname === item.href
-              ? 'text-zinc-900 dark:text-zinc-100'
-              : 'text-zinc-600 dark:text-zinc-400'
-          }`}
+          className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-zinc-900 dark:hover:text-zinc-100 ${pathname === item.href
+            ? 'text-zinc-900 dark:text-zinc-100'
+            : 'text-zinc-600 dark:text-zinc-400'
+            }`}
         >
           {item.label}
         </Link>

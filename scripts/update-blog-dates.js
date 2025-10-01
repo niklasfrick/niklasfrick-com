@@ -13,7 +13,7 @@ const __dirname = dirname(__filename)
  * This can be run manually or as a pre-commit hook
  */
 
-const BLOG_DIR = path.join(__dirname, '../app/blog')
+const BLOG_DIR = path.join(__dirname, '../app/beitraege')
 
 function getCurrentDate() {
   return new Date().toISOString().split('T')[0]
@@ -104,7 +104,7 @@ function createNewBlogPost(slug, title, description) {
   date: '${currentDate}',
   lastUpdated: '${currentDate}',
   alternates: {
-    canonical: '/blog/${slug}',
+    canonical: '/beitraege/${slug}',
   },
 };
 

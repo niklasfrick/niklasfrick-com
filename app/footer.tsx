@@ -1,6 +1,6 @@
 'use client'
 import { AnimatedBackground } from '@/components/ui/animated-background'
-import { TextLoop } from '@/components/ui/text-loop'
+import { CliTextLoop } from '@/components/ui/cli-text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
@@ -68,11 +68,13 @@ function ThemeSwitch() {
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-zinc-100 px-0 py-4 sm:mt-24 dark:border-zinc-800">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-        <TextLoop
-          className="min-w-0 flex-1 text-xs text-zinc-500 sm:text-sm"
-          interval={3}
+    <footer className="mt-16 border-t border-zinc-100 px-0 py-4 pb-12 sm:mt-24 sm:pb-4 dark:border-zinc-800">
+      <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:items-center">
+        <CliTextLoop
+          className="w-full max-w-full min-w-0 text-xs text-zinc-500 sm:flex-1 sm:text-sm"
+          interval={5}
+          typingSpeed={120}
+          prompt="niklas@localhost"
         >
           <span>© {new Date().getFullYear()} Niklas Frick.</span>
           <span>Gebraut mit Kaffee &amp; einer Prise KI-Magie ☕🤖</span>
@@ -87,9 +89,25 @@ export function Footer() {
               Nim.
             </a>
           </span>
-        </TextLoop>
-        <div className="flex-shrink-0 text-sm text-zinc-400">
-          <ThemeSwitch />
+        </CliTextLoop>
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center">
+          <div className="order-2 flex gap-4 text-xs text-zinc-400 sm:order-1">
+            <a
+              href="/impressum"
+              className="transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+            >
+              Impressum
+            </a>
+            <a
+              href="/datenschutz"
+              className="transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+            >
+              Datenschutz
+            </a>
+          </div>
+          <div className="order-1 flex-shrink-0 text-sm text-zinc-400 sm:order-2">
+            <ThemeSwitch />
+          </div>
         </div>
       </div>
     </footer>

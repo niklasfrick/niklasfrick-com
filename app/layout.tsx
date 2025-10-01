@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
+import Head from 'next/head'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -19,11 +20,12 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Niklas Frick - Platform Engineer',
+    default:
+      'Niklas Frick - Platform Engineer (Kubernetes, DevOps,Cloud Native)',
     template: '%s | Niklas Frick',
   },
   description:
-    'Niklas Frick ist ein Platform Engineer, der sich auf die Erstellung intuitiver und performanter Web-Erfahrungen konzentriert.',
+    'Beiträge, Projekte und Vorträge zu Platform Engineering, Kubernetes und DevOps in Liechtenstein und der Schweiz.',
 }
 
 const geist = Geist({
@@ -43,6 +45,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" suppressHydrationWarning>
+      <Head>
+        {typeof window !== 'undefined' &&
+          window.location.hostname === 'niklasfrick.com' && (
+            <>
+              <script
+                async
+                defer
+                data-domain="niklasfrick.com"
+                src="https://plausible.balzers.xyz/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"
+              ></script>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.plausible =
+                    window.plausible ||
+                    function () {
+                      (window.plausible.q = window.plausible.q || []).push(
+                        arguments
+                      );
+                    };
+                  `,
+                }}
+              />
+            </>
+          )}
+      </Head>
       <body
         className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
       >

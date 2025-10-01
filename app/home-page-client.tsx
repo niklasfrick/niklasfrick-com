@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
 import { XIcon } from 'lucide-react'
-import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
   MorphingDialog,
@@ -14,7 +13,6 @@ import Link from 'next/link'
 import { AnimatedBackground } from '@/components/ui/animated-background'
 import { SocialIcon } from '@/components/ui/social-icons'
 import { formatDate } from '@/lib/blog-utils'
-import { CompanyLogo } from '@/components/ui/company-logo'
 import { BlogPost } from '@/lib/blog-types'
 
 const VARIANTS_CONTAINER = {
@@ -136,15 +134,6 @@ interface HomePageClientProps {
     video: string
     id: string
   }>
-  workExperience: Array<{
-    company: string
-    title: string
-    start: string
-    end: string
-    link: string
-    id: string
-    logo?: string
-  }>
   latestBlogPosts: BlogPost[]
   email: string
   socialLinks: Array<{
@@ -156,7 +145,6 @@ interface HomePageClientProps {
 
 export function HomePageClient({
   projects,
-  workExperience,
   latestBlogPosts,
   email,
   socialLinks,
@@ -174,9 +162,10 @@ export function HomePageClient({
       >
         <div className="flex-1">
           <p className="text-base leading-relaxed text-zinc-600 sm:text-lg md:text-xl dark:text-zinc-400">
-            Fokussiert auf die Erstellung intuitiver und performanter
-            Web-Erfahrungen. Überbrückung der Lücke zwischen Design und
-            Entwicklung.
+            Spezialisiert auf die Entwicklung und Optimierung von Entwicklerplattformen,
+            die Teams dabei unterstützen, effizienter zu arbeiten und bessere Software zu erstellen.
+            Durch Artikel, Schulungen und praktische Anleitungen teile ich mein Wissen,
+            um komplexe Infrastruktur-Herausforderungen verständlich zu machen.
           </p>
         </div>
       </motion.section>
@@ -216,58 +205,10 @@ export function HomePageClient({
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-4 text-xl font-medium sm:mb-5 sm:text-2xl">
-          Berufserfahrung
-        </h3>
-        <div className="flex flex-col space-y-3 sm:space-y-2">
-          {workExperience.map((job) => (
-            <a
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={job.id}
-            >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-3 sm:p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full flex-row items-center justify-between gap-2 sm:gap-3">
-                  <div className="flex min-w-0 flex-1 items-center space-x-2 sm:space-x-3">
-                    <CompanyLogo
-                      companyName={job.company}
-                      logoUrl={job.logo}
-                      size={40}
-                      className="h-10 w-10 flex-shrink-0 rounded-lg object-contain sm:h-12 sm:w-12"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <h4 className="truncate text-base font-normal sm:text-lg md:text-xl dark:text-zinc-100">
-                        {job.title}
-                      </h4>
-                      <p className="truncate text-sm text-zinc-500 sm:text-base md:text-lg dark:text-zinc-400">
-                        {job.company}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="flex-shrink-0 text-sm whitespace-nowrap text-zinc-600 sm:text-base md:text-lg dark:text-zinc-400">
-                    {job.start} - {job.end}
-                  </p>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
         <div className="mb-3 flex items-center justify-between gap-2 sm:mb-4">
-          <h3 className="text-xl font-medium sm:text-2xl">Blog</h3>
+          <h3 className="text-xl font-medium sm:text-2xl">Neueste Beiträge</h3>
           <Link
-            href="/blog"
+            href="/beitraege"
             className="text-xs whitespace-nowrap text-zinc-600 transition-colors duration-200 hover:text-zinc-900 sm:text-sm dark:text-zinc-400 dark:hover:text-zinc-100"
           >
             Alle Beiträge →
