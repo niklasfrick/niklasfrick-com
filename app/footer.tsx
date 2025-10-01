@@ -79,14 +79,14 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Niklas Frick.</span>
           <span>Gebraut mit Kaffee &amp; einer Prise KI-Magie ☕🤖</span>
           <span>
-            Basierend auf{' '}
+            vorlage:{' '}
             <a
               href="https://github.com/ibelick/nim"
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
             >
-              Nim.
+              nim
             </a>
           </span>
         </CliTextLoop>

@@ -113,9 +113,11 @@ export function CliTextLoop({
     return (
         <div className={cn('relative font-mono', className)}>
             <div className="flex items-start pl-8 sm:pl-12">
-                <span className="mr-1 shrink-0 text-green-400">{prompt}$</span>
+                <span className="mr-1 shrink-0 text-green-600 dark:text-green-400">
+                    {prompt}$
+                </span>
                 <div className="min-w-0 flex-1 overflow-hidden">
-                    <span className="text-white">{typedCommand}</span>
+                    <span className="text-zinc-800 dark:text-white">{typedCommand}</span>
                     {animationState === 'typing-command' && showCursor && (
                         <span className="animate-pulse">|</span>
                     )}
