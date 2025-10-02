@@ -13,21 +13,29 @@ function CopyButton() {
   const handleCopy = async () => {
     if (!isCopied) {
       try {
-        const fullUrl = window.location.href
-        await navigator.clipboard.writeText(fullUrl)
+        // Sanitize URL using URL constructor
+        const sanitizedUrl = new URL(window.location.href).href
+        await navigator.clipboard.writeText(sanitizedUrl)
         setText('Kopiert')
         setIsCopied(true)
       } catch (err) {
         console.error('Failed to copy URL:', err)
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea')
-        textArea.value = window.location.href
-        document.body.appendChild(textArea)
-        textArea.select()
-        document.execCommand('copy')
-        document.body.removeChild(textArea)
-        setText('Kopiert')
-        setIsCopied(true)
+        // Fallback for older browsers with sanitized URL
+        try {
+          const sanitizedUrl = new URL(window.location.href).href
+          const textArea = document.createElement('textarea')
+          textArea.value = sanitizedUrl
+          textArea.style.position = 'fixed'
+          textArea.style.opacity = '0'
+          document.body.appendChild(textArea)
+          textArea.select()
+          document.execCommand('copy')
+          document.body.removeChild(textArea)
+          setText('Kopiert')
+          setIsCopied(true)
+        } catch (fallbackErr) {
+          console.error('Fallback copy also failed:', fallbackErr)
+        }
       }
     }
   }
